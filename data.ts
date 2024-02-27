@@ -1,46 +1,3 @@
-# Crypto Transactions Visualizer
-
-It is an easily usable crypto-transactions graphing tool written in vanilla javascript.
-
-![image](https://github.com/Ph4sm4/Crypto-Transactions-Visualizer/assets/78483172/6a55b058-dd23-4fe9-ac10-1777b2b322f5)
-
-### _'transactionValue'_ property
-- This field controls the color and thickness of the lines.
-- Colors of the lines and the nodes are easily changeable in _TransactionRenderer.ts_.
-- Determining how fast the lines get thick is also customizable in _TransactionRenderer.ts_.
-  
-### Functionalities:
-- Moving the _wallet_ and _incoming/outgoing_ nodes by click-dragging. All linking lines are going to be updated accordingly.
-- Moving the entire graph/canvas by click-dragging somewhere else than on a node.
-
-### In-code usage:
-```tsx
-export default function TransactionGraph({}: Props) {
-  const [windowAvailable, setWindowAvailable] = useState<boolean>(false); // to access the 'window' object
-
-  useEffect(() => {
-    setWindowAvailable(true);
-  }, []);
-
-  return (
-    windowAvailable && (
-      <main>
-        <TransactionVisualizer
-          width={window.innerWidth}
-          height={window.innerHeight - 250}
-          data={data}
-        />
-      </main>
-    )
-  );
-}
-```
-
-### How to structure data
-
-Structuring is done using these 2 interfaces:
-
-```ts
 export interface RendererNode {
 	name: string;
 	type: 'outgoing' | 'incoming' | 'wallet';
@@ -53,11 +10,7 @@ export interface RendererNode {
 export interface RendererData {
 	nodes: RendererNode[];
 }
-```
 
-### Sample data object would look like this:
-
-```ts
 export const data: RendererData = {
 	nodes: [
 		{
@@ -127,5 +80,19 @@ export const data: RendererData = {
 		},
 	],
 };
-```
 
+export function getIncomingNodes(data: RendererData) {
+	return data.nodes.filter((x) => x.type === 'incoming');
+}
+
+export function getOutgoingNodes(data: RendererData) {
+	return data.nodes.filter((x) => x.type === 'outgoing');
+}
+
+export function getWalletNodeIndex(data: RendererData) {
+	for (let i = 0; i < data.nodes.length; i++) {
+		if (data.nodes[i].type === 'wallet') return i;
+	}
+
+	return -1;
+}
