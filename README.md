@@ -2,7 +2,7 @@
 
 It is an easily usable crypto-transactions graphing tool written in vanilla javascript.
 
-![image](https://github.com/Ph4sm4/Crypto-Transactions-Visualizer/assets/78483172/6a55b058-dd23-4fe9-ac10-1777b2b322f5)
+![image](https://github.com/Ph4sm4/Crypto-Transactions-Visualizer/assets/78483172/e626f8d2-1750-48bc-bdda-52a63f948b77)
 
 ### _'transactionValue'_ property
 - This field controls the color and thickness of the lines.
